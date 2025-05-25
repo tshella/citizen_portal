@@ -1,0 +1,39 @@
+spring:
+  profiles:
+    active: dev
+
+---
+spring:
+  config:
+    activate-on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/citizen_portal_dev
+    username: dev_user
+    password: dev_password
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+app:
+  jwt:
+    secret: devSecretKey
+    expiration-ms: 86400000
+
+---
+spring:
+  config:
+    activate-on-profile: prod
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/citizen_portal
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
