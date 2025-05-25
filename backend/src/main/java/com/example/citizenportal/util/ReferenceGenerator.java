@@ -1,11 +1,17 @@
-package com.example.citizenportal.util
+package com.example.citizenportal.util;
 
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-class ReferenceGenerator {
-    static String generateApplicationRef(Long id) {
-        String datePart = LocalDateTime.now().format(DateTimeFormatter.ofPattern('yyyyMMdd'))
-        "APP-${datePart}-${id.toString().padLeft(6, '0')}"
+public class ReferenceGenerator {
+
+    public static String generateApplicationReference(Long applicationId) {
+        String datePart = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+        return String.format("APP-%s-%06d", datePart, applicationId);
+    }
+
+    public static String generatePaymentReference(Long paymentId) {
+        String datePart = LocalDate.now().format(DateTimeFormatter.BASIC_ISO_DATE);
+        return String.format("PAY-%s-%06d", datePart, paymentId);
     }
 }

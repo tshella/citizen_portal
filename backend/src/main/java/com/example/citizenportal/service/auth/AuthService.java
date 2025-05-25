@@ -13,11 +13,11 @@ import com.example.citizenportal.security.services.UserDetailsImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -44,24 +44,24 @@ public class AuthService {
 
     public JwtResponse authenticateUser(LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        loginRequest.getUsername(),
-                        loginRequest.getPassword()));
+            new UsernamePasswordAuthenticationToken(
+                loginRequest.getUsername(),
+                loginRequest.getPassword()));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
 
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();        
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
+            .map(GrantedAuthority::getAuthority)
+            .collect(Collectors.toList());
 
         return new JwtResponse(
-                jwt,
-                userDetails.getId(),
-                userDetails.getUsername(),
-                userDetails.getEmail(),
-                roles);
+            jwt,
+            userDetails.getId(),
+            userDetails.getUsername(),
+            userDetails.getEmail(),
+            roles);
     }
 
     public void registerUser(RegisterRequest registerRequest) {
@@ -74,14 +74,14 @@ public class AuthService {
         }
 
         User user = new User(
-                registerRequest.getUsername(),
-                registerRequest.getEmail(),
-                passwordEncoder.encode(registerRequest.getPassword()));
+            registerRequest.getUsername(),
+            registerRequest.getEmail(),
+            passwordEncoder.encode(registerRequest.getPassword()));
 
-        Set<Role> roles = new HashSet<>();
-        Role userRole = roleRepository.findByName("ROLE_CITIZEN")
-                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-        roles.add(userRole);
+        Set<Role> roles = Set.of(
+            roleRepository.findByName(Role.ERole.ROLE_CITIZEN)
+                .orElseThrow(() -> new RuntimeException("Error: Role is not found."))
+        );
 
         user.setRoles(roles);
         userRepository.save(user);
