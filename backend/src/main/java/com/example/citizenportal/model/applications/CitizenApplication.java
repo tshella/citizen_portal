@@ -1,7 +1,7 @@
 package com.example.citizenportal.model.applications;
 
 import com.example.citizenportal.model.auth.User;
-import com.example.citizenportal.model.services.Service;
+import com.example.citizenportal.model.services.GovernmentService;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.time.LocalDateTime;
@@ -20,7 +20,7 @@ public class CitizenApplication {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "service_id", nullable = false)
-    private Service service;
+    private GovernmentService service;
 
     @Column(columnDefinition = "TEXT")
     private String applicationData;
