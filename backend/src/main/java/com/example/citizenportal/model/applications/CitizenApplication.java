@@ -1,4 +1,4 @@
-package com.example.citizenportal.applications.models;
+package com.example.citizenportal.model.applications;
 
 import com.example.citizenportal.model.auth.User;
 import com.example.citizenportal.model.services.Service;

@@ -1,7 +1,8 @@
 package com.example.citizenportal.admin;
 
 import com.example.citizenportal.dto.response.UserResponse;
-import com.example.citizenportal.dto.response.ApplicationResponse;
+import com.example.citizenportal.model.applications.CitizenApplication;
+import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +14,9 @@ import java.util.Set;
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ADMIN')")
+@RequiredArgsConstructor
 public class AdminController {
     private final AdminService adminService;
-
-    public AdminController(AdminService adminService) {
-        this.adminService = adminService;
-    }
 
     @GetMapping("/users")
     public ResponseEntity<Page<UserResponse>> getAllUsers(Pageable pageable) {
@@ -34,7 +32,7 @@ public class AdminController {
     }
 
     @GetMapping("/applications")
-    public ResponseEntity<Page<ApplicationResponse>> getAllApplications(Pageable pageable) {
+    public ResponseEntity<Page<CitizenApplication>> getAllApplications(Pageable pageable) {
         return ResponseEntity.ok(adminService.getAllApplications(pageable));
     }
 

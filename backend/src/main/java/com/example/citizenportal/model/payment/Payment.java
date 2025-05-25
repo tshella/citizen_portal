@@ -3,7 +3,6 @@ package com.example.citizenportal.model.payment;
 import com.example.citizenportal.model.applications.CitizenApplication;
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 

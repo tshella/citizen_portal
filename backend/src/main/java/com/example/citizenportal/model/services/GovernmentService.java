@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "services")
-public class Service {
+@Table(name = "government_services")
+public class GovernmentService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
