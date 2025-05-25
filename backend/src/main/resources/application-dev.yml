@@ -1,0 +1,27 @@
+spring:
+  config:
+    activate-on-profile: dev
+  datasource:
+    url: jdbc:postgresql://localhost:5432/citizen_portal_dev
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+app:
+  jwt:
+    secret: dev-secret-key-1234567890
+  file:
+    upload-dir: ./uploads-dev
+
+logging:
+  level:
+    root: INFO
+    org.springframework.security: DEBUG
+    com.example.citizenportal: DEBUG

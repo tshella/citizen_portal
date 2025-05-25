@@ -1,0 +1,30 @@
+spring:
+  config:
+    activate-on-profile: prod
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:citizen_portal}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+  file:
+    upload-dir: ${FILE_UPLOAD_DIR:/var/uploads}
+
+logging:
+  level:
+    root: WARN
+    org.springframework: INFO
+    com.example.citizenportal: INFO
+  file:
+    name: /var/log/citizen-portal/application.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 7

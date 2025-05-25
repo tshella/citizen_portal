@@ -1,39 +1,36 @@
 spring:
   profiles:
     active: dev
-
----
-spring:
-  config:
-    activate-on-profile: dev
-  datasource:
-    url: jdbc:postgresql://localhost:5432/citizen_portal_dev
-    username: dev_user
-    password: dev_password
   jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-
-app:
-  jwt:
-    secret: devSecretKey
-    expiration-ms: 86400000
-
----
-spring:
-  config:
-    activate-on-profile: prod
-  datasource:
-    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/citizen_portal
-    username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
-  jpa:
+    open-in-view: false
     hibernate:
       ddl-auto: validate
     show-sql: false
+  mail:
+    host: smtp.example.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls.enable: true
 
 app:
   jwt:
     secret: ${JWT_SECRET}
-    expiration-ms: ${JWT_EXPIRATION_MS:86400000}
+    expiration-ms: 86400000 # 24 hours
+    refresh-expiration-ms: 604800000 # 7 days
+  file:
+    upload-dir: ${FILE_UPLOAD_DIR:uploads}
+  cors:
+    allowed-origins: "*"
+    allowed-methods: "*"
+    allowed-headers: "*"
+
+server:
+  servlet:
+    context-path: /api
+  error:
+    include-message: always
