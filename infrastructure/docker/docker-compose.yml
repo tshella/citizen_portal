@@ -1,27 +1,73 @@
-#version: '3.8'
+version: '3.8'
 
 services:
   postgres:
-    image: postgres:15
+    image: postgres:15-alpine
+    container_name: citizen-portal-db
     environment:
       POSTGRES_DB: citizen_portal
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      POSTGRES_USER: citizen_admin  
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-StrongPassword123!}  
+      POSTGRES_HOST_AUTH_METHOD: scram-sha-256  
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./postgres/init.sql:/docker-entrypoint-initdb.d/init.sql  # Initial schema
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U citizen_admin -d citizen_portal"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    networks:
+      - citizen-network
 
   backend:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: citizen-portal-backend
     ports:
       - "8080:8080"
     environment:
-      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/citizen_portal
-      SPRING_DATASOURCE_USERNAME: postgres
-      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_PROFILES_ACTIVE: prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/citizen_portal?sslmode=prefer
+      SPRING_DATASOURCE_USERNAME: citizen_admin
+      SPRING_DATASOURCE_PASSWORD: ${DB_PASSWORD:-StrongPassword123!}
+      SPRING_JPA_HIBERNATE_DDL_AUTO: validate  
+      SPRING_LIQUIBASE_ENABLED: ${LIQUIBASE_ENABLED:-false}  
+      JAVA_OPTS: "-Xmx512m -Xms256m -XX:+UseContainerSupport -XX:MaxRAMPercentage=75.0"
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./logs:/app/logs  
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    restart: unless-stopped
+    networks:
+      - citizen-network
+
+ 
+  redis:
+     image: redis:7-alpine
+     container_name: citizen-portal-redis
+     ports:
+       - "6379:6379"
+     volumes:
+      - redis_data:/data
+     networks:
+       - citizen-network
 
 volumes:
   postgres_data:
+  redis_data:
+
+networks:
+  citizen-network:
+    driver: bridge
+    name: citizen-portal-network
