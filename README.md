@@ -1,108 +1,103 @@
-***Citizen Service Portal*** 
+# 🚀 Citizen Service Portal
 
-Enable residents to access a wide range of government/public services online. The platform should allow users to submit applications, track requests, receive updates, pay bills, and download official documents
+> Enable residents to access a wide range of government/public services online — from applications to payments to documents.
 
-**Author: Manaka Anthony Raphasha**
+![Java](https://img.shields.io/badge/Java-17-blue.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen.svg)
+![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)
+![Build](https://img.shields.io/badge/build-passing-green.svg)
 
-Backend System
+**Author**: _Manaka Anthony Raphasha_
 
-Table of Contents
+---
 
-    Project Overview
+## 📌 Table of Contents
 
-    System Architecture
+- [📖 Project Overview](#project-overview)
+- [🏛️ System Architecture](#system-architecture)
+- [📚 API Documentation](#api-documentation)
+- [⚙️ Development Setup](#development-setup)
+- [🚀 Deployment](#deployment)
+- [🧪 Testing](#testing)
+- [🔒 Security](#security)
+- [🛠 Troubleshooting](#troubleshooting)
+- [🤝 Contributing](#contributing)
 
-    API Documentation
+---
 
-    Development Setup
+## 📖 Project Overview
 
-    Deployment
+The **Citizen Service Portal** is a secure, scalable backend system that enables residents to digitally access government/public services.
 
-    Testing
+### ✨ Key Features
 
-    Security
+- 🔐 JWT-based Authentication & Authorization
+- 🗂️ Service Catalog Management
+- 📝 Application Submission & Tracking
+- 📄 PDF Document Generation
+- 🛠️ Admin Dashboard
+- 💳 Mock Payment Integration
 
-    Troubleshooting
+---
 
-    Contributing
+## 🏛️ System Architecture
 
-Project Overview
+### 🧰 Technical Stack
 
-The Citizen Service Portal is a secure, scalable backend system that enables residents to access government services online. The platform allows users to submit applications, track requests, pay bills, and download official documents.
+- **Backend:** Java 17 + Spring Boot 3.2
+- **Database:** PostgreSQL 15
+- **Auth:** JWT + OAuth2
+- **PDFs:** iText
+- **Build Tool:** Gradle (Groovy DSL)
 
-Key Features:
+### 📁 Directory Structure
 
-    User authentication and authorization (JWT)
-
-    Service catalog management
-
-    Application submission and tracking
-
-    Document generation (PDF)
-
-    Admin dashboard functionality
-
-    Payment integration (mock implementation)
-
-System Architecture
-Technical Stack
-
-    Backend: Java 17 with Spring Boot 3.2
-
-    Database: PostgreSQL 15
-
-    Authentication: JWT with OAuth2 support
-
-    Document Generation: iText PDF
-
-    Build Tool: Gradle (Groovy DSL)
-
-Directory Structure
-
+```text
 citizen-portal/
-├── backend/
-│   ├── src/main/java/com/example/citizenportal/
-│   │   ├── admin/               # Admin management
-│   │   ├── applications/        # Application processing
-│   │   ├── config/              # Configuration classes
-│   │   ├── controller/          # API endpoints
-│   │   ├── dto/                 # Data transfer objects
-│   │   ├── exception/           # Exception handling
-│   │   ├── model/               # Database entities
-│   │   ├── repository/          # Data access layer
-│   │   ├── security/            # Security components
-│   │   ├── service/             # Business logic
-│   │   ├── services/            # Service catalog
-│   │   ├── util/                # Utility classes
-│   │   └── CitizenportalApplication.java
-│   ├── src/main/resources/      # Configuration files
-│   └── build.gradle             # Build configuration
+└── backend/
+    ├── src/main/java/com/example/citizenportal/
+    │   ├── admin/               # Admin management
+    │   ├── applications/        # Application processing
+    │   ├── config/              # Configuration classes
+    │   ├── controller/          # API endpoints
+    │   ├── dto/                 # Data transfer objects
+    │   ├── exception/           # Exception handling
+    │   ├── model/               # Database entities
+    │   ├── repository/          # Data access layer
+    │   ├── security/            # Security components
+    │   ├── service/             # Business logic
+    │   ├── services/            # Service catalog
+    │   ├── util/                # Utility classes
+    │   └── CitizenportalApplication.java
+    ├── src/main/resources/      # Configuration files
+    └── build.gradle             # Build configuration
 
-API Documentation
-Authentication
+📚 API Documentation
+<details> <summary><strong>🔐 Authentication</strong></summary>
 Endpoint	Method	Description
 /api/auth/login	POST	Authenticate user
 /api/auth/register	POST	Register new user
 /api/auth/refreshtoken	POST	Refresh JWT token
-Services
+</details> <details> <summary><strong>🧾 Services</strong></summary>
 Endpoint	Method	Description
 /api/services	GET	Get all services
 /api/services/{id}	GET	Get service by ID
 /api/services/category/{categoryId}	GET	Get services by category
-Applications
+</details> <details> <summary><strong>📄 Applications</strong></summary>
 Endpoint	Method	Description
 /api/applications	POST	Submit new application
 /api/applications/{id}	GET	Get application details
-Admin
+</details> <details> <summary><strong>🛠 Admin</strong></summary>
 Endpoint	Method	Description	Permissions
 /api/admin/users	GET	List all users	ROLE_ADMIN
 /api/admin/users/{userId}/roles	PUT	Update user roles	ROLE_ADMIN
 /api/admin/applications	GET	List all applications	ROLE_ADMIN
 /api/admin/applications/{applicationId}/status	PUT	Update application status	ROLE_ADMIN
-Development Setup
-Prerequisites
+</details>
+⚙️ Development Setup
+✅ Prerequisites
 
-    Java 17 JDK
+    Java 17+
 
     PostgreSQL 15
 
@@ -110,55 +105,43 @@ Prerequisites
 
     Docker (optional)
 
-Installation
-
-    Clone the repository:
-    bash
+🛠 Installation
 
 git clone https://github.com/your-repo/citizen-portal.git
 cd citizen-portal/backend
 
-Configure database:
-bash
+Configure the database:
 
 createdb citizen_portal
 
-Set up environment variables:
-bash
+Setup environment variables:
 
-    cp src/main/resources/application-sample.yml src/main/resources/application-dev.yml
+cp src/main/resources/application-sample.yml src/main/resources/application-dev.yml
+# Edit application-dev.yml with your DB credentials
 
-    Update application-dev.yml with your database credentials.
-
-Running the Application
-bash
+▶️ Run the app
 
 ./gradlew bootRun
 
-The application will be available at http://localhost:8080
-Deployment
-Docker Setup
+App available at: http://localhost:8080
+🚀 Deployment
+🐳 Docker
 
-    Build the Docker image:
-    bash
+Build the image:
 
 docker build -t citizen-portal-backend .
 
 Run with Docker Compose:
-bash
 
-    docker-compose up -d
+docker-compose up -d
 
-Configuration
+🔧 Production Configuration
 
-Production configuration should be set in:
+Set in:
 
     application-prod.yml
 
-    Environment variables
-
-Required Environment Variables:
-yaml
+    Environment Variables
 
 SPRING_DATASOURCE_URL: jdbc:postgresql://host:port/database
 SPRING_DATASOURCE_USERNAME: username
@@ -167,86 +150,73 @@ APP_JWT_SECRET: your-secret-key
 APP_JWT_EXPIRATION_MS: 86400000
 FILE_UPLOAD_DIR: /path/to/uploads
 
-Testing
-Running Tests
-bash
+🧪 Testing
+
+Run tests:
 
 ./gradlew test
 
-Test Coverage
-
-Generate coverage report:
-bash
+Generate test coverage:
 
 ./gradlew jacocoTestReport
 
-API Testing
+API Testing with Postman:
 
-Import the Postman collection from docs/postman for API testing.
-Security
-Authentication Flow
+    Import docs/postman/collection.json into Postman
 
-    Client submits credentials to /api/auth/login
+🔒 Security
+🔁 Authentication Flow
 
-    Server responds with JWT token and refresh token
+    User logs in → /api/auth/login
 
-    Client includes JWT in Authorization header for subsequent requests
+    Receives JWT + refresh token
 
-    Token expires after configured time (default: 24 hours)
+    JWT used in Authorization header
 
-    Client can refresh token using /api/auth/refreshtoken
+    Refresh with /api/auth/refreshtoken
 
-Security Features
+🛡 Security Features
 
-    Password encryption (BCrypt)
+    BCrypt password hashing
 
-    Role-based access control
+    Role-based access control (RBAC)
 
-    JWT token validation
+    JWT validation
 
     CSRF protection
 
-    Input validation
+    Input sanitization and validation
 
-Troubleshooting
-Common Issues
+🛠 Troubleshooting
+Problem	Possible Fix
+❌ Database errors	Ensure credentials in application-dev.yml are correct and PostgreSQL is running
+🔒 JWT errors	Verify token expiration and secret key
+📁 Upload issues	Ensure directory exists, writable, and within file limits
+🤝 Contributing
 
-    Database connection errors:
+    Fork the repo
 
-        Verify credentials in application-dev.yml
+    Create a new branch:
 
-        Ensure PostgreSQL is running
+git checkout -b feature/my-feature
 
-    JWT authentication failures:
+Commit your changes:
 
-        Check token expiration
+git commit -am "Add feature"
 
-        Verify secret key matches between server and client
+Push to GitHub:
 
-    File upload issues:
+    git push origin feature/my-feature
 
-        Ensure upload directory exists and is writable
+    Open a Pull Request
 
-        Check file size limits
-
-Contributing
-
-    Fork the repository
-
-    Create your feature branch (git checkout -b feature/your-feature)
-
-    Commit your changes (git commit -am 'Add some feature')
-
-    Push to the branch (git push origin feature/your-feature)
-
-    Create a new Pull Request
-
-Coding Standards:
+✏️ Code Guidelines
 
     Follow Google Java Style Guide
 
-    Use meaningful variable names
+    Use meaningful variable and method names
 
-    Include Javadoc for public methods
+    Add Javadoc for public APIs
 
-    Write unit tests for new features
+    Include unit tests for new features
+
