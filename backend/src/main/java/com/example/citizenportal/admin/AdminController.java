@@ -1,11 +1,14 @@
 package com.example.citizenportal.admin;
 
 import com.example.citizenportal.dto.response.UserResponse;
+import com.example.citizenportal.dto.response.ApplicationResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/admin")
