@@ -1,5 +1,8 @@
 package com.example.citizenportal.model.payment;
 
-public class PaymentStatus {
-    
+public enum PaymentStatus {
+    PENDING,
+    COMPLETED,
+    FAILED,
+    REFUNDED
 }
