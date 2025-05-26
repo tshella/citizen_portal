@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { GovernmentService, ServiceCategory } from '../models/service.model';
-import { CreateServiceDto } from '../dto';
+import { environment } from '../../environments/environment';
+import { GovernmentService, ServiceCategory } from './service.model';
+import { CreateServiceDto } from './dto/create-service.dto';
 
 @Injectable({ providedIn: 'root' })
 export class ServiceService {

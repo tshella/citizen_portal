@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApplicationService } from '../services/application.service';
+import { ApplicationService } from './application.service';
 import { Application } from './application.model';
-import { NotificationService } from '../../../core/services/notification.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-application-controller',

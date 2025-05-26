@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ApplicationController } from './application.controller';
 import { ApplicationService } from './application.service';
-import { NotificationService } from '../../../core/services/notification.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 describe('ApplicationController', () => {
   let component: ApplicationController;

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { Application, ApplicationDocument } from '../models/application.model';
-import { CreateApplicationDto, UpdateApplicationDto } from '../dto';
+import { environment } from '../../environments/environment';
+import { Application, ApplicationDocument } from './application.model';
+import { CreateApplicationDto } from './dto/create-application.dto';
+import { UpdateApplicationDto } from './dto/update-application.dto';
 
 @Injectable({ providedIn: 'root' })
 export class ApplicationService {
