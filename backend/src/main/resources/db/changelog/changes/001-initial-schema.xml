@@ -1,0 +1,206 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="001-create-roles-table" author="yourname">
+        <createTable tableName="roles">
+            <column name="id" type="INT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint 
+            tableName="roles" 
+            columnNames="name"
+            constraintName="uk_role_name"/>
+    </changeSet>
+
+    <changeSet id="002-create-users-table" author="yourname">
+        <createTable tableName="users">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(120)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addUniqueConstraint 
+            tableName="users" 
+            columnNames="username"
+            constraintName="uk_user_username"/>
+            
+        <addUniqueConstraint 
+            tableName="users" 
+            columnNames="email"
+            constraintName="uk_user_email"/>
+    </changeSet>
+
+    <changeSet id="003-create-user-roles-table" author="yourname">
+        <createTable tableName="user_roles">
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addPrimaryKey 
+            tableName="user_roles" 
+            columnNames="user_id, role_id"
+            constraintName="pk_user_roles"/>
+            
+        <addForeignKeyConstraint 
+            baseTableName="user_roles" 
+            baseColumnNames="user_id"
+            referencedTableName="users" 
+            referencedColumnNames="id"
+            constraintName="fk_user_roles_user"
+            onDelete="CASCADE"/>
+            
+        <addForeignKeyConstraint 
+            baseTableName="user_roles" 
+            baseColumnNames="role_id"
+            referencedTableName="roles" 
+            referencedColumnNames="id"
+            constraintName="fk_user_roles_role"
+            onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="004-create-refresh-tokens-table" author="yourname">
+        <createTable tableName="refresh_tokens">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="token" type="VARCHAR(255)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="expiry_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        
+        <addForeignKeyConstraint 
+            baseTableName="refresh_tokens" 
+            baseColumnNames="user_id"
+            referencedTableName="users" 
+            referencedColumnNames="id"
+            constraintName="fk_refresh_token_user"
+            onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="005-create-service-categories-table" author="yourname">
+        <createTable tableName="service_categories">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="006-create-government-services-table" author="yourname">
+        <createTable tableName="government_services">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="category_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="description" type="TEXT"/>
+            <column name="fee" type="DECIMAL(10,2)"/>
+            <column name="processing_time_days" type="INT"/>
+        </createTable>
+        
+        <addForeignKeyConstraint 
+            baseTableName="government_services" 
+            baseColumnNames="category_id"
+            referencedTableName="service_categories" 
+            referencedColumnNames="id"
+            constraintName="fk_service_category"
+            onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="007-create-citizen-applications-table" author="yourname">
+        <createTable tableName="citizen_applications">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="service_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="application_data" type="TEXT"/>
+            <column name="status" type="VARCHAR(50)"/>
+            <column name="created_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="reference_number" type="VARCHAR(20)"/>
+        </createTable>
+        
+        <addForeignKeyConstraint 
+            baseTableName="citizen_applications" 
+            baseColumnNames="user_id"
+            referencedTableName="users" 
+            referencedColumnNames="id"
+            constraintName="fk_application_user"
+            onDelete="CASCADE"/>
+            
+        <addForeignKeyConstraint 
+            baseTableName="citizen_applications" 
+            baseColumnNames="service_id"
+            referencedTableName="government_services" 
+            referencedColumnNames="id"
+            constraintName="fk_application_service"
+            onDelete="CASCADE"/>
+    </changeSet>
+
+    <changeSet id="008-create-payments-table" author="yourname">
+        <createTable tableName="payments">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="application_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="amount" type="DECIMAL(10,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="transaction_id" type="VARCHAR(100)"/>
+            <column name="payment_date" type="TIMESTAMP"/>
+        </createTable>
+        
+        <addForeignKeyConstraint 
+            baseTableName="payments" 
+            baseColumnNames="application_id"
+            referencedTableName="citizen_applications" 
+            referencedColumnNames="id"
+            constraintName="fk_payment_application"
+            onDelete="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>

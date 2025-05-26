@@ -1,0 +1,50 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="013-add-indexes" author="yourname">
+        <createIndex 
+            tableName="citizen_applications" 
+            indexName="idx_application_user"
+            unique="false">
+            <column name="user_id"/>
+        </createIndex>
+        
+        <createIndex 
+            tableName="citizen_applications" 
+            indexName="idx_application_service"
+            unique="false">
+            <column name="service_id"/>
+        </createIndex>
+        
+        <createIndex 
+            tableName="citizen_applications" 
+            indexName="idx_application_status"
+            unique="false">
+            <column name="status"/>
+        </createIndex>
+        
+        <createIndex 
+            tableName="citizen_applications" 
+            indexName="idx_application_created_at"
+            unique="false">
+            <column name="created_at"/>
+        </createIndex>
+        
+        <createIndex 
+            tableName="payments" 
+            indexName="idx_payment_status"
+            unique="false">
+            <column name="status"/>
+        </createIndex>
+        
+        <createIndex 
+            tableName="refresh_tokens" 
+            indexName="idx_refresh_token_expiry"
+            unique="false">
+            <column name="expiry_date"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

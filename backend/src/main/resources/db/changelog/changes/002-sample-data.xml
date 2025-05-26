@@ -1,0 +1,59 @@
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.9.xsd">
+
+    <changeSet id="009-insert-roles" author="yourname">
+        <insert tableName="roles">
+            <column name="name" value="ROLE_CITIZEN"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_ADMIN"/>
+        </insert>
+        <insert tableName="roles">
+            <column name="name" value="ROLE_MODERATOR"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="010-insert-admin-user" author="yourname">
+        <insert tableName="users">
+            <column name="username" value="admin"/>
+            <column name="email" value="admin@citizenportal.com"/>
+            <column name="password" value="$2a$10$5v5ZvZnZgZrj/6kYd.5Xe.3t7LW6Q5c5t5J5X5v5ZvZnZgZrj/6kYd"/>
+        </insert>
+        
+        <insert tableName="user_roles">
+            <column name="user_id" valueComputed="(SELECT id FROM users WHERE username = 'admin')"/>
+            <column name="role_id" valueComputed="(SELECT id FROM roles WHERE name = 'ROLE_ADMIN')"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="011-insert-service-categories" author="yourname">
+        <insert tableName="service_categories">
+            <column name="name" value="Identity Documents"/>
+            <column name="description" value="Services related to national ID, passport, etc."/>
+        </insert>
+        <insert tableName="service_categories">
+            <column name="name" value="Tax Services"/>
+            <column name="description" value="Services related to tax payments and filings"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="012-insert-government-services" author="yourname">
+        <insert tableName="government_services">
+            <column name="category_id" valueComputed="(SELECT id FROM service_categories WHERE name = 'Identity Documents')"/>
+            <column name="name" value="Passport Application"/>
+            <column name="description" value="Apply for a new passport or renewal"/>
+            <column name="fee" value="75.00"/>
+            <column name="processing_time_days" value="14"/>
+        </insert>
+        <insert tableName="government_services">
+            <column name="category_id" valueComputed="(SELECT id FROM service_categories WHERE name = 'Tax Services')"/>
+            <column name="name" value="Income Tax Filing"/>
+            <column name="description" value="File your annual income tax return"/>
+            <column name="fee" value="0.00"/>
+            <column name="processing_time_days" value="30"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
