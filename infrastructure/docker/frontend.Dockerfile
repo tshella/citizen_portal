@@ -12,7 +12,7 @@ RUN npm run build -- --configuration=production
 # Runtime stage with Nginx
 FROM nginx:1.25-alpine
 
-COPY --from=builder /app/dist/frontend /usr/share/nginx/html
+COPY --from=builder /app/dist/citizen-portal-frontend /usr/share/nginx/html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Remove default nginx website
