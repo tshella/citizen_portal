@@ -7,4 +7,5 @@ export interface Payment {
     paymentDate: Date;
     paymentMethod: 'CARD' | 'BANK_TRANSFER' | 'OTHER';
     receiptUrl?: string;
+    metadata?: Record<string, unknown>;
   }

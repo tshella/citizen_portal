@@ -1,0 +1,37 @@
+.error-state, .no-data {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    text-align: center;
+  
+    mat-icon {
+      font-size: 48px;
+      width: 48px;
+      height: 48px;
+      margin-bottom: 16px;
+    }
+  
+    p {
+      margin-bottom: 16px;
+      color: rgba(0, 0, 0, 0.6);
+    }
+  }
+  
+  mat-table {
+    width: 100%;
+  }
+  
+  mat-chip {
+    font-size: 12px;
+  }
+  
+  .getStatusColor(status: string): string {
+    switch(status) {
+      case 'COMPLETED': return 'primary';
+      case 'PENDING': return 'accent';
+      case 'FAILED': return 'warn';
+      default: return '';
+    }
+  }
