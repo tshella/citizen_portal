@@ -1,0 +1,59 @@
+<app-loading-spinner [loading]="loading"></app-loading-spinner>
+
+<div *ngIf="service && !loading" class="service-detail-container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>{{ service.name }}</mat-card-title>
+      <mat-card-subtitle>{{ service.category?.name }}</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>{{ service.description }}</p>
+      
+      <mat-divider></mat-divider>
+
+      <div class="service-meta">
+        <div class="meta-item">
+          <mat-icon>attach_money</mat-icon>
+          <span>Fee: {{ service.fee | currency }}</span>
+        </div>
+        <div class="meta-item">
+          <mat-icon>schedule</mat-icon>
+          <span>Processing Time: {{ service.processingTimeDays }} days</span>
+        </div>
+      </div>
+
+      <mat-divider></mat-divider>
+
+      <h3>Required Documents</h3>
+      <mat-list>
+        <mat-list-item *ngFor="let doc of service.requiredDocuments">
+          <mat-icon matListItemIcon>description</mat-icon>
+          <div matListItemTitle>{{ doc }}</div>
+        </mat-list-item>
+      </mat-list>
+    </mat-card-content>
+
+    <mat-card-actions align="end">
+      <button mat-raised-button color="primary" (click)="applyForService()">
+        Apply Now
+      </button>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="relatedServices.length > 0" class="related-services">
+    <h3>Related Services</h3>
+    <div class="related-services-grid">
+      <mat-card *ngFor="let service of relatedServices" class="related-service-card">
+        <mat-card-header>
+          <mat-card-title>{{ service.name }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions>
+          <button mat-button (click)="router.navigate(['/services', service.id])">
+            View Details
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>

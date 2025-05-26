@@ -10,7 +10,7 @@ import { ApplicationCreateComponent } from './application-create/application-cre
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
 import { ApplicationService } from './application.service';
 import { ApplicationStatusPipe } from './pipes/application-status.pipe';
-import { ApplicationTypePipe } from './pipes/application-type.pipe';
+import { ApplicationTypePipe } from './pipes/application-type.pipe'
 
 const routes = [
   { 

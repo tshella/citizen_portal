@@ -7,7 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ServiceListComponent } from './service-list/service-list.component';
 import { ServiceDetailComponent } from './service-detail/service-detail.component';
 import { ServiceCategoryComponent } from './service-category/service-category.component';
-import { ServiceService } from './services/service.service';
+import { ServiceService } from './service.service';
 import { ServiceFeePipe } from './pipes/service-fee.pipe';
 
 const routes = [
