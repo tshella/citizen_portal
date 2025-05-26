@@ -105,7 +105,7 @@ ng lint           # Linting
 
 ▶️ Local Setup
 
-git clone https://github.com/your-repo/citizen-portal.git
+git clone https://github.com/tshella/citizen-portal.git
 cd citizen-portal/frontend
 npm install
 
@@ -197,7 +197,7 @@ Endpoint	Method	Description	Role
 
 🛠 Setup
 
-git clone https://github.com/your-repo/citizen-portal.git
+git clone https://github.com/tshella/citizen-portal.git
 cd citizen-portal/backend
 
 createdb citizen_portal
