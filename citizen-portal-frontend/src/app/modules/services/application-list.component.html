@@ -1,0 +1,58 @@
+<app-page-header title="My Applications" [showActions]="true">
+    <button mat-raised-button color="primary" (click)="createNew()">
+      <mat-icon>add</mat-icon> New Application
+    </button>
+  </app-page-header>
+  
+  <mat-card>
+    <app-loading-spinner [loading]="loading"></app-loading-spinner>
+  
+    <div *ngIf="!loading">
+      <mat-table [dataSource]="dataSource">
+        <!-- Reference Number Column -->
+        <ng-container matColumnDef="referenceNumber">
+          <mat-header-cell *matHeaderCellDef>Reference #</mat-header-cell>
+          <mat-cell *matCellDef="let application">{{ application.referenceNumber }}</mat-cell>
+        </ng-container>
+  
+        <!-- Service Column -->
+        <ng-container matColumnDef="service">
+          <mat-header-cell *matHeaderCellDef>Service</mat-header-cell>
+          <mat-cell *matCellDef="let application">{{ application.service?.name }}</mat-cell>
+        </ng-container>
+  
+        <!-- Status Column -->
+        <ng-container matColumnDef="status">
+          <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
+          <mat-cell *matCellDef="let application">
+            <mat-chip [color]="getStatusColor(application.status)" selected>
+              {{ application.status | titlecase }}
+            </mat-chip>
+          </mat-cell>
+        </ng-container>
+  
+        <!-- Created At Column -->
+        <ng-container matColumnDef="createdAt">
+          <mat-header-cell *matHeaderCellDef>Submitted</mat-header-cell>
+          <mat-cell *matCellDef="let application">
+            {{ application.createdAt | date:'mediumDate' }}
+          </mat-cell>
+        </ng-container>
+  
+        <!-- Actions Column -->
+        <ng-container matColumnDef="actions">
+          <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
+          <mat-cell *matCellDef="let application">
+            <button mat-icon-button color="primary" (click)="viewDetails(application.id)">
+              <mat-icon>visibility</mat-icon>
+            </button>
+          </mat-cell>
+        </ng-container>
+  
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+  
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    </div>
+  </mat-card>
