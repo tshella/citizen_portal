@@ -1,103 +1,193 @@
-# 🚀 Citizen Service Portal
+🚀 Citizen Service Portal
 
-> Enable residents to access a wide range of government/public services online — from applications to payments to documents.
+    Enable residents to access a wide range of government/public services online — from applications to payments to documents.
 
-![Java](https://img.shields.io/badge/Java-17-blue.svg)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-brightgreen.svg)
-![License](https://img.shields.io/badge/license-MIT-lightgrey.svg)
-![Build](https://img.shields.io/badge/build-passing-green.svg)
+Author: Manaka Anthony Raphasha
 
-**Author**: _Manaka Anthony Raphasha_
+🌐 Frontend – Angular Client
 
----
+Modern Angular-based interface for seamless citizen-government service interactions.
+🛠️ Technical Stack
 
-## 📌 Table of Contents
+    Framework: Angular 16
 
-- [📖 Project Overview](#project-overview)
-- [🏛️ System Architecture](#system-architecture)
-- [📚 API Documentation](#api-documentation)
-- [⚙️ Development Setup](#development-setup)
-- [🚀 Deployment](#deployment)
-- [🧪 Testing](#testing)
-- [🔒 Security](#security)
-- [🛠 Troubleshooting](#troubleshooting)
-- [🤝 Contributing](#contributing)
+    UI Library: Angular Material 15
 
----
+    Forms: Reactive Forms
 
-## 📖 Project Overview
+    HTTP: Angular HttpClient
 
-The **Citizen Service Portal** is a secure, scalable backend system that enables residents to digitally access government/public services.
+    State Management: RxJS + Service Architecture
 
-### ✨ Key Features
+    i18n: ngx-translate
 
-- 🔐 JWT-based Authentication & Authorization
-- 🗂️ Service Catalog Management
-- 📝 Application Submission & Tracking
-- 📄 PDF Document Generation
-- 🛠️ Admin Dashboard
-- 💳 Mock Payment Integration
+    Build: Angular CLI
 
----
+📂 Project Structure
 
-## 🏛️ System Architecture
+frontend/
+├── src/
+│   ├── app/
+│   │   ├── core/                # Auth, guards, interceptors
+│   │   ├── modules/             # Feature modules
+│   │   │   ├── admin/           
+│   │   │   ├── applications/    
+│   │   │   ├── payments/        
+│   │   │   └── services/        
+│   │   ├── shared/              # UI components & utilities
+│   │   └── styles/              # Global SCSS/CSS
+│   ├── assets/                  # Logos, i18n, etc.
+│   └── environments/            # Environment configs
+├── angular.json
+└── package.json
 
-### 🧰 Technical Stack
+✨ Features
 
-- **Backend:** Java 17 + Spring Boot 3.2
-- **Database:** PostgreSQL 15
-- **Auth:** JWT + OAuth2
-- **PDFs:** iText
-- **Build Tool:** Gradle (Groovy DSL)
+    🛡️ Authentication & Security
 
-### 📁 Directory Structure
+        JWT-based sessions
 
-```text
-citizen-portal/
-└── backend/
-    ├── src/main/java/com/example/citizenportal/
-    │   ├── admin/               # Admin management
-    │   ├── applications/        # Application processing
-    │   ├── config/              # Configuration classes
-    │   ├── controller/          # API endpoints
-    │   ├── dto/                 # Data transfer objects
-    │   ├── exception/           # Exception handling
-    │   ├── model/               # Database entities
-    │   ├── repository/          # Data access layer
-    │   ├── security/            # Security components
-    │   ├── service/             # Business logic
-    │   ├── services/            # Service catalog
-    │   ├── util/                # Utility classes
-    │   └── CitizenportalApplication.java
-    ├── src/main/resources/      # Configuration files
-    └── build.gradle             # Build configuration
+        Refresh tokens
 
-📚 API Documentation
-<details> <summary><strong>🔐 Authentication</strong></summary>
+        Role-based route guards
+
+        Password strength validation
+
+        CSRF/XSS protection
+
+        Secure headers and CSP
+
+    📋 Service Catalog
+
+        Filter by category
+
+        View requirements
+
+        Interactive wizards
+
+    📬 Application Dashboard
+
+        Status tracking
+
+        Upload documents
+
+        PDF receipt generation
+
+    💳 Integrated Payments
+
+        Mock payment gateway
+
+        Receipts & transaction logs
+
+    👨‍💻 Admin Console
+
+        User management
+
+        Service configs
+
+        Application oversight
+
+        Analytics dashboards
+
+    📱 Responsive Design
+
+        Mobile-first layouts
+
+        Accessibility (WCAG)
+
+        Print-friendly styles
+
+🧪 Testing
+
+ng test           # Unit Tests
+ng e2e            # End-to-End
+ng lint           # Linting
+
+▶️ Local Setup
+
+git clone https://github.com/your-repo/citizen-portal.git
+cd citizen-portal/frontend
+npm install
+
+cp src/environments/environment.sample.ts src/environments/environment.ts
+# Edit environment.ts to match your backend API
+ng serve
+
+Access at: http://localhost:4200
+🐳 Docker Deployment
+
+docker build -t citizen-portal-frontend .
+docker run -p 80:80 citizen-portal-frontend
+
+🏛️ Backend – Spring Boot API
+
+Robust backend for secure digital service delivery.
+
+Java
+Spring Boot
+License
+Build
+🧰 Stack
+
+    Language: Java 17
+
+    Framework: Spring Boot 3.2
+
+    Database: PostgreSQL 15
+
+    Security: JWT + OAuth2 + BCrypt
+
+    PDF: iText
+
+    Build Tool: Gradle (Groovy DSL)
+
+📁 Project Structure
+
+backend/
+├── src/main/java/com/example/citizenportal/
+│   ├── admin/               # Admin controllers/services
+│   ├── applications/        # Citizen applications logic
+│   ├── config/              # Spring configuration
+│   ├── controller/          # REST endpoints
+│   ├── dto/                 # Request/response models
+│   ├── exception/           # Global error handling
+│   ├── model/               # JPA entities
+│   ├── repository/          # Spring Data JPA interfaces
+│   ├── security/            # JWT, OAuth2, password config
+│   ├── service/             # Business logic
+│   ├── services/            # Public services catalog
+│   └── CitizenportalApplication.java
+├── src/main/resources/
+│   ├── application.yml
+│   └── templates/
+└── build.gradle
+
+📚 API Endpoints
+<details> <summary>🔐 Authentication</summary>
 Endpoint	Method	Description
-/api/auth/login	POST	Authenticate user
-/api/auth/register	POST	Register new user
-/api/auth/refreshtoken	POST	Refresh JWT token
-</details> <details> <summary><strong>🧾 Services</strong></summary>
+/api/auth/login	POST	Login with credentials
+/api/auth/register	POST	Register new citizen
+/api/auth/refreshtoken	POST	Get new JWT token
+</details> <details> <summary>🧾 Services</summary>
 Endpoint	Method	Description
-/api/services	GET	Get all services
-/api/services/{id}	GET	Get service by ID
-/api/services/category/{categoryId}	GET	Get services by category
-</details> <details> <summary><strong>📄 Applications</strong></summary>
+/api/services	GET	List all services
+/api/services/{id}	GET	Get service details
+/api/services/category/{id}	GET	Services by category
+</details> <details> <summary>📄 Applications</summary>
 Endpoint	Method	Description
 /api/applications	POST	Submit new application
 /api/applications/{id}	GET	Get application details
-</details> <details> <summary><strong>🛠 Admin</strong></summary>
-Endpoint	Method	Description	Permissions
+</details> <details> <summary>🛠 Admin</summary>
+Endpoint	Method	Description	Role
 /api/admin/users	GET	List all users	ROLE_ADMIN
-/api/admin/users/{userId}/roles	PUT	Update user roles	ROLE_ADMIN
-/api/admin/applications	GET	List all applications	ROLE_ADMIN
-/api/admin/applications/{applicationId}/status	PUT	Update application status	ROLE_ADMIN
+/api/admin/users/{id}/roles	PUT	Assign roles	ROLE_ADMIN
+/api/admin/applications	GET	List applications	ROLE_ADMIN
+/api/admin/applications/{id}/status	PUT	Update application status	ROLE_ADMIN
 </details>
-⚙️ Development Setup
+⚙️ Local Development
 ✅ Prerequisites
 
-    Java 17+
+    Java 17
 
     PostgreSQL 15
 
@@ -105,118 +195,80 @@ Endpoint	Method	Description	Permissions
 
     Docker (optional)
 
-🛠 Installation
+🛠 Setup
 
 git clone https://github.com/your-repo/citizen-portal.git
 cd citizen-portal/backend
 
-Configure the database:
-
 createdb citizen_portal
 
-Setup environment variables:
-
 cp src/main/resources/application-sample.yml src/main/resources/application-dev.yml
-# Edit application-dev.yml with your DB credentials
-
-▶️ Run the app
-
+# Edit with your DB config
 ./gradlew bootRun
 
-App available at: http://localhost:8080
+Access API at: http://localhost:8080
 🚀 Deployment
 🐳 Docker
 
-Build the image:
-
 docker build -t citizen-portal-backend .
-
-Run with Docker Compose:
-
 docker-compose up -d
 
-🔧 Production Configuration
+🔐 Production Config
 
-Set in:
+Set in application-prod.yml or as environment variables:
 
-    application-prod.yml
+SPRING_DATASOURCE_URL=jdbc:postgresql://host:port/db
+SPRING_DATASOURCE_USERNAME=youruser
+SPRING_DATASOURCE_PASSWORD=yourpass
+APP_JWT_SECRET=secretkey
+APP_JWT_EXPIRATION_MS=86400000
+FILE_UPLOAD_DIR=/var/lib/citizenportal/uploads
 
-    Environment Variables
+🧪 Backend Testing
 
-SPRING_DATASOURCE_URL: jdbc:postgresql://host:port/database
-SPRING_DATASOURCE_USERNAME: username
-SPRING_DATASOURCE_PASSWORD: password
-APP_JWT_SECRET: your-secret-key
-APP_JWT_EXPIRATION_MS: 86400000
-FILE_UPLOAD_DIR: /path/to/uploads
+./gradlew test                # Unit tests
+./gradlew jacocoTestReport    # Coverage
 
-🧪 Testing
+Postman:
 
-Run tests:
+Import docs/postman/collection.json into Postman
 
-./gradlew test
+🔒 Security Overview
 
-Generate test coverage:
+    🔑 JWT + refresh token auth
 
-./gradlew jacocoTestReport
+    🔒 BCrypt password hashing
 
-API Testing with Postman:
+    ✅ Input validation & sanitation
 
-    Import docs/postman/collection.json into Postman
+    🔐 RBAC (admin vs citizen)
 
-🔒 Security
-🔁 Authentication Flow
+    🚫 CSRF/XSS protection
 
-    User logs in → /api/auth/login
+    🧾 Secure file uploads (path, MIME, size)
 
-    Receives JWT + refresh token
-
-    JWT used in Authorization header
-
-    Refresh with /api/auth/refreshtoken
-
-🛡 Security Features
-
-    BCrypt password hashing
-
-    Role-based access control (RBAC)
-
-    JWT validation
-
-    CSRF protection
-
-    Input sanitization and validation
-
-🛠 Troubleshooting
-Problem	Possible Fix
-❌ Database errors	Ensure credentials in application-dev.yml are correct and PostgreSQL is running
-🔒 JWT errors	Verify token expiration and secret key
-📁 Upload issues	Ensure directory exists, writable, and within file limits
 🤝 Contributing
 
-    Fork the repo
+    Fork the repository
 
-    Create a new branch:
+    Create a new branch
+    git checkout -b feature/my-feature
 
-git checkout -b feature/my-feature
+    Commit your changes
+    git commit -am "Add feature"
 
-Commit your changes:
-
-git commit -am "Add feature"
-
-Push to GitHub:
-
+    Push your branch
     git push origin feature/my-feature
 
     Open a Pull Request
 
-✏️ Code Guidelines
+🧭 Guidelines
 
-    Follow Google Java Style Guide
+    Follow Angular & Java style guides
 
-    Use meaningful variable and method names
+    Keep tests above 80% coverage
 
-    Add Javadoc for public APIs
+    Write clear documentation/comments
 
-    Include unit tests for new features
+    Use meaningful commit messages
 

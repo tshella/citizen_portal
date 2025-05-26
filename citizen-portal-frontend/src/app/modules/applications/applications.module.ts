@@ -8,7 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ApplicationListComponent } from './application-list/application-list.component';
 import { ApplicationCreateComponent } from './application-create/application-create.component';
 import { ApplicationDetailComponent } from './application-detail/application-detail.component';
-import { ApplicationService } from './services/application.service';
+import { ApplicationService } from './application.service';
 import { ApplicationStatusPipe } from './pipes/application-status.pipe';
 import { ApplicationTypePipe } from './pipes/application-type.pipe';
 

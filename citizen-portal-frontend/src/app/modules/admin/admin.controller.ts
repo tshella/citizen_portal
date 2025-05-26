@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RoleGuard } from '../../../core/guards/role.guard';
+import { RoleGuard } from '../../core/guards/role.guard';
 
 @Component({
   selector: 'app-admin-controller',

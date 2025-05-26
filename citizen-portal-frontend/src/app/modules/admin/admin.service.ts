@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from '../../../../environments/environment';
-import { User, UserStats } from '../models/user.model';
-import { CreateUserDto, UpdateUserDto } from '../dto';
+import { environment } from '../../environments/environment';
+import { User, UserStats } from './user.model';
+import { CreateUserDto,  } from './dto/create-user.dto';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable({ providedIn: 'root' })
 export class AdminService {

@@ -7,7 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 import { UserManagementComponent } from './user-management/user-management.component';
 import { ApplicationManagementComponent } from './application-management/application-management.component';
-import { AdminService } from './services/admin.service';
+import { AdminService } from './admin.service';
 import { RoleGuard } from '../../core/guards/role.guard';
 
 const routes = [

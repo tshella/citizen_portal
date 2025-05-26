@@ -8,7 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { PaymentListComponent } from './payment-list/payment-list.component';
 import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
 import { PaymentCreateComponent } from './payment-create/payment-create.component';
-import { PaymentService } from './services/payment.service';
+import { PaymentService } from './payment.service';
 import { PaymentStatusPipe } from './pipes/payment-status.pipe';
 
 const routes = [

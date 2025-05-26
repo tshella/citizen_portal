@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Payment } from './';
+import { Payment } from './payment.model';
 import { CreatePaymentDto } from './dto/create-payment.dto';
 
 @Injectable({ providedIn: 'root' })
